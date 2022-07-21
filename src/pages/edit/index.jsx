@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/usefetch";
 
+const statusEnum = {
+     "DISPONÍVEL" :1,
+     "VENDIDA"  :2,
+     "RESERVADA":3 
+};
 
 const Edit = () => {
     const [emp,setEmp] = useState([]);
@@ -26,7 +31,7 @@ const Edit = () => {
     }, []);
 
     function handlerSave() {
-        
+
     }
 
     function getCardValues() {   
@@ -139,18 +144,58 @@ const RenderUnidades = (props) => {
 }
 
 const UnidadeItem = (props) => {
-    const {item,blocos} = props;    
+    const {item,blocos} = props;  
+    const [fetching,setFetching] = useState(false); 
+    const [status,setStatus] = useState([]); 
+    const [itemUni,setitemUni] = useState([]);     
+    const [isEdit, setIsEdit] = useState(false);
+    const [statusInput, setStatusInput] = useState([]);
+    const [valorInput, setValorInput] = useState(0);
+
+    const statusRef = useRef(null);
+    const valorRef = useRef(null);
+
+    useEffect(() => {
+        setitemUni(item)
+        setValorInput(item.valor)
+        setStatusInput(item.descrição)
+        async function getData(){
+            const [data,err] = await useFetch('GET',"status")
+            !!data && setStatus(data);         
+
+        } getData()
+    }, [])
+
+    const handlerSave = () => {
+        const data = {
+            valor : valorInput,
+            id_status : statusEnum[statusInput]
+        }
+
+        setFetching(true);
+        useFetch('PUT',`unidade/${item.id}`,{},data)
+        .then((res) => setitemUni(res))
+        .finally(() => {
+            setFetching(false)
+        });
+    }
     return (
         <div className="unidade_item">
-            <p>Unidade - {item.id}</p>
-            <p>Status - {item.descrição}</p>
-            <p>R${item.valor}</p>
-            <select defaultValue={item.id_bloco} name="" id="">
+            <p>Unidade:{itemUni.id}</p>
+            <select value={statusInput} onChange={(event) => setStatusInput(event.target.value)}>
                 {
-                   blocos?.map(m => <option key={m} value={m}>bloco - {m}</option>) 
-                }                
+                    status?.map(m => <option value={m.descrição}>{m.descrição}</option>)
+                }
             </select>
-            <button className="btn_salvar">Editar</button>
+            <label htmlFor="Valor">R$</label>
+            <input  type="text" id="Valor" value={valorInput} onChange={(event) => setValorInput(event.target.value)}/>
+            <p>Bloco {itemUni.id_bloco}</p>
+            {
+                !fetching 
+                ? <button className="btn_salvar" onClick={() => handlerSave()}>Salvar</button> 
+                : <button className="btn_salvar" disabled >Salvando</button> 
+            }
+
             <button className="btn_voltar">Excluir</button>
         </div>
     )

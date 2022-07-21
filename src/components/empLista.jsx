@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 const EmpLista = (props) => {
@@ -11,15 +12,21 @@ const EmpLista = (props) => {
     !!error && <h1>Error</h1>
     !!fetching && <h1>Carregando</h1>
     return (
-        <ul>
+        <div className="home_container">
+            <div className="titulo">
+                <p>Empreendimento</p>
+                <p>Localização</p>
+                <p>Ação</p>
+            </div>
             {
                 data?.map(m => <EmpItem key={m.id} item ={m}/>)
             }
-        </ul>
+        </div>
     )
 }
 
 const EmpItem = (props) =>{    
+    const navigate = useNavigate();
     const {
         id,
         nome,
@@ -27,12 +34,11 @@ const EmpItem = (props) =>{
     } = props.item;
 
     return (
-      <Link to={`/edit/${id}`}>
-        <div>
-          <h3>{nome}</h3>
-          <p>{localizacao}</p>
+        <div className="home_item">
+          <h3 className="home_text">{nome}</h3>
+          <p className="home_text">{localizacao}</p>
+          <button className="btn_salvar" onClick={() => navigate(`/edit/${id}`)}>Editar</button>
         </div>
-      </Link>
     );
 
 

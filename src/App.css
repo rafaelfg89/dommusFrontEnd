@@ -112,3 +112,31 @@
   margin: 5px;
   padding: 5px;
 }
+.home_container{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #d7d7d7;
+  /* height: 125px; */
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  min-width: 600px;
+}
+.home_item{
+  display: flex;
+  flex-wrap: nowrap;
+  width: 90%;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.home_text{
+  width: 250px;
+}
+.titulo{
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  border-bottom: black solid 2px;
+}

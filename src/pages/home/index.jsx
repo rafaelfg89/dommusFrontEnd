@@ -19,7 +19,7 @@ const Home = () => {
 
     }, []);
 
-    return <EmpLista 
+    return <EmpLista     
         data = {emp}
         error = {error}
         fetching = {fetching}
