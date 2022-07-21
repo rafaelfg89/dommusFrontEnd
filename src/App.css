@@ -39,3 +39,76 @@
 .read-the-docs {
   color: #888;
 }
+
+.container {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  border: beige;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  min-width: 800px;
+}
+.cards {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+.cards_item {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  min-width: 30%;
+  justify-content: center;
+  background-color: rgb(183, 183, 186);
+  border-radius: 10px;
+  margin: 5px;
+}
+.cards_item p{
+  font-size: 14px;
+  font-weight: 550;
+  color: rgb(54, 54, 54);
+}
+.item_card {
+  padding-right: 25px;
+}
+.btn_container{
+  display: flex;
+  border: beige;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  min-width: 800px;
+  justify-content: space-around;
+}
+.btn_voltar{
+  background-color: rgb(215, 67, 67);
+  color: white;
+}
+.btn_salvar{
+  background-color: rgb(67, 121, 215);
+  color: white;
+}
+.form_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #d7d7d7;
+  height: 125px;
+  align-items: center;
+  border-radius: 10px;
+}
+.form{
+  display: flex;
+}
+.unidade{
+  display: flex;
+  flex-direction: column;
+}
+.unidade_item{
+  display: flex;
+  justify-content: space-between;
+  border: black solid 1px;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
