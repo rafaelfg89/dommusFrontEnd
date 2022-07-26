@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -8,11 +8,13 @@ const EmpLista = (props) => {
         error,
         fetching
     } = props;
+    
 
     !!error && <h1>Error</h1>
     !!fetching && <h1>Carregando</h1>
     return (
         <div className="home_container">
+
             <div className="titulo">
                 <p>Empreendimento</p>
                 <p>Localização</p>

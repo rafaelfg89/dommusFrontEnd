@@ -1,0 +1,9 @@
+                leftJoin('blocos','blocos.id','=','empreendimentos.id')
+                ->leftJoin('unidade','unidade.id_bloco','=','blocos.id')
+                ->join('status','status.id','=','unidade.id_status')
+                ->where('empreendimentos.id',$id)
+                ->groupBy('empreendimentos.id','empreendimentos.localizacao','empreendimentos.prev_entrega','empreendimentos.nome','status.descrição')
+                ->select('empreendimentos.id','empreendimentos.localizacao','empreendimentos.prev_entrega','empreendimentos.nome','status.descrição',
+                    DB::raw('COUNT(unidade.valor) as quantidade_unidade'),
+                    DB::raw('SUM(unidade.valor) as valor_unidade_total'))
+                ->get();

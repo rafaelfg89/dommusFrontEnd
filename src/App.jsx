@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import 'antd/dist/antd.css'
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import Edit from './pages/edit';
